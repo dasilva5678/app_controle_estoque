@@ -1,0 +1,4 @@
+enum EnumRoutes {
+  login,
+  createAccount
+}

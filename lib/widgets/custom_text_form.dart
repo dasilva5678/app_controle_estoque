@@ -51,72 +51,74 @@ class _CustomTextFormState extends State<CustomTextForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: widget.inputHeight,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.all(
-          Radius.circular(widget.borderRadius),
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8),
+      child: Container(
+        height: widget.inputHeight,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(widget.borderRadius),
+          ),
         ),
-      ),
-      child: TextFormField(
-        style: TextStyle(
-          color: AppColors.darkBlue,
-          fontSize: 17,
-        ),
-        autofocus: widget.autoFocus,
-        controller: widget.controller,
-        focusNode: widget.focusNode,
-        keyboardType: widget.keyboardType,
-        maxLines: widget.maxLines,
-        obscureText: widget.obscureText,
-        inputFormatters: widget.inputFormatters,
-        validator: widget.validator,
-        cursorColor: AppColors.blue,
-        decoration: InputDecoration(
-          prefixIcon: widget.suffixIcon,
-          suffixIcon: widget.prefixIcon,
-          fillColor: Colors.white,
-          filled: true,
-          isDense: false,
-          hintText: widget.hintText,
-          hintStyle: TextStyle(
-            color: Colors.grey.shade400,
+        child: TextFormField(
+          style: TextStyle(
+            color: AppColors.darkBlue,
+            fontSize: 17,
           ),
-          labelText: widget.label,
-          labelStyle: TextStyle(
-            color: AppColors.blue,
-          ),
-          border: OutlineInputBorder(
-            borderSide: BorderSide(
-              style: BorderStyle.solid,
+          autofocus: widget.autoFocus,
+          controller: widget.controller,
+          focusNode: widget.focusNode,
+          keyboardType: widget.keyboardType,
+          maxLines: widget.maxLines,
+          obscureText: widget.obscureText,
+          inputFormatters: widget.inputFormatters,
+          validator: widget.validator,
+          cursorColor: AppColors.blue,
+          decoration: InputDecoration(
+            prefixIcon: widget.suffixIcon,
+            suffixIcon: widget.prefixIcon,
+            fillColor: Colors.white,
+            filled: true,
+            hintText: widget.hintText,
+            hintStyle: TextStyle(
+              color: Colors.grey.shade400,
             ),
-            borderRadius: BorderRadius.all(
-              Radius.circular(widget.borderRadius),
+            labelText: widget.label,
+            labelStyle: TextStyle(
+              color: AppColors.blue,
             ),
-          ),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.blue),
-            borderRadius: BorderRadius.all(
-              Radius.circular(widget.borderRadius),
+            border: OutlineInputBorder(
+              borderSide: BorderSide(
+                style: BorderStyle.solid,
+              ),
+              borderRadius: BorderRadius.all(
+                Radius.circular(widget.borderRadius),
+              ),
             ),
-          ),
-          disabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.blue),
-            borderRadius: BorderRadius.all(
-              Radius.circular(widget.borderRadius),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.blue),
+              borderRadius: BorderRadius.all(
+                Radius.circular(widget.borderRadius),
+              ),
             ),
-          ),
-          errorBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.red),
-            borderRadius: BorderRadius.all(
-              Radius.circular(widget.borderRadius),
+            disabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.blue),
+              borderRadius: BorderRadius.all(
+                Radius.circular(widget.borderRadius),
+              ),
             ),
+            errorBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.red),
+              borderRadius: BorderRadius.all(
+                Radius.circular(widget.borderRadius),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: AppColors.blue),
+              borderRadius: BorderRadius.circular(widget.borderRadius),
+            ),
+            contentPadding: widget.contentPadding,
           ),
-          focusedBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: AppColors.blue),
-            borderRadius: BorderRadius.circular(widget.borderRadius),
-          ),
-          contentPadding: widget.contentPadding,
         ),
       ),
     );

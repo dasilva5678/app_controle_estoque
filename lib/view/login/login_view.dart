@@ -1,11 +1,47 @@
+import 'package:app_controle_estoque/controllers/login_controller.dart';
+import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
+import 'package:app_controle_estoque/core/enums/enum_routes.dart';
+import 'package:app_controle_estoque/core/routes/app_routes.dart';
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/core/utils/size_box_height.dart';
 import 'package:app_controle_estoque/widgets/custom_button.dart';
+import 'package:app_controle_estoque/widgets/custom_divider.dart';
+import 'package:app_controle_estoque/widgets/custom_image.dart';
 import 'package:app_controle_estoque/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
+import 'package:validatorless/validatorless.dart';
 
-class LoginView extends StatelessWidget {
-  const LoginView({super.key});
+class LoginView extends StatefulWidget {
+  LoginView({super.key});
+
+  @override
+  State<LoginView> createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+
+final loginController = getIt<LoginControler>();
+
+  final _formKey = GlobalKey<FormState>();
+
+
+
+@override
+  void dispose() {
+    loginController.emailController.dispose();
+    loginController.passwordController.dispose();
+    super.dispose();
+  }
+
+
+  void logar() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+    }
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +55,15 @@ class LoginView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               SizeBoxHeight.customSizedBox(context, 0.18),
-              image(context),
+              CustomLogoImage(image: 'assets/images/icon.png'),
               SizeBoxHeight.customSizedBox(context, 0.09),
-              form(context),
+              _buildForm(context),
               SizeBoxHeight.customSizedBox(context, 0.01),
-              buttonCreateAccount(),
+              buildButtonCreateAccount(),
               SizeBoxHeight.customSizedBox(context, 0.01),
-              Divider(
-                color: Colors.grey.shade500,
-                thickness: 1,
-              ),
+              CustomDivider(),
               SizeBoxHeight.customSizedBox(context, 0.05),
-              buttonLogout(context),
+              _buildButtonLogout(context),
               SizeBoxHeight.customSizedBox(context, 0.15),
               version(context),
               SizeBoxHeight.customSizedBox(context, 0.05),
@@ -41,49 +74,53 @@ class LoginView extends StatelessWidget {
     );
   }
 
-  Widget image(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      child: Image.asset(
-        'assets/images/icon.png',
-        width: MediaQuery.of(context).size.width * 0.35,
+  Widget _buildForm(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(
+        children: [
+          CustomTextForm(
+            controller: loginController.emailController,
+            inputHeight: 70,
+            borderRadius: 30,
+            hintText: 'E-mail',
+            label: 'E-mail',
+            suffixIcon: Icon(
+              Icons.email_outlined,
+              color: AppColors.blue,
+            ),
+            validator: Validatorless.multiple([
+              Validatorless.required('Por favor digite seu e-mail'),
+              Validatorless.email('E-mail inválido'),
+            ]),
+          ),
+          SizeBoxHeight.customSizedBox(context, 0.005),
+          CustomTextForm(
+            controller: loginController.passwordController,
+            inputHeight: 70,
+            borderRadius: 30,
+            hintText: 'Senha',
+            label: 'Senha',
+            suffixIcon: Icon(
+              Icons.lock_outlined,
+              color: AppColors.blue,
+            ),
+            prefixIcon: Icon(
+              Icons.remove_red_eye_outlined,
+              color: AppColors.blue,
+            ),
+            validator: Validatorless.multiple([
+              Validatorless.required('Por favor digite sua senha'),
+              Validatorless.min(
+                  6, 'Sua senha precisa ter no mínimo 6 caracteres'),
+            ]),
+          ),
+        ],
       ),
     );
   }
 
-  Widget form(BuildContext context) {
-    return Column(
-      children: [
-        CustomTextForm(
-          inputHeight: 50,
-          borderRadius: 30,
-          hintText: 'E-mail',
-          label: 'E-mail',
-          suffixIcon: Icon(
-            Icons.email_outlined,
-            color: AppColors.blue,
-          ),
-        ),
-        SizeBoxHeight.customSizedBox(context, 0.03),
-        CustomTextForm(
-          inputHeight: 50,
-          borderRadius: 30,
-          hintText: 'Senha',
-          label: 'Senha',
-          suffixIcon: Icon(
-            Icons.lock_outlined,
-            color: AppColors.blue,
-          ),
-          prefixIcon: Icon(
-            Icons.remove_red_eye_outlined,
-            color: AppColors.blue,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget buttonLogout(BuildContext context) {
+  Widget _buildButtonLogout(BuildContext context) {
     return CustomButton(
       height: 50,
       width: MediaQuery.of(context).size.width * 0.7,
@@ -91,18 +128,22 @@ class LoginView extends StatelessWidget {
       colorLabel: Colors.white,
       borderRadius: 30,
       label: 'Entrar',
-      onTap: () {},
+      onTap: () {
+        logar();
+      },
     );
   }
 
-  Widget buttonCreateAccount() {
+  Widget buildButtonCreateAccount() {
     return TextButton(
       child: Text('Criar conta, clique aqui!'),
       style: TextButton.styleFrom(
         foregroundColor: AppColors.blue,
         textStyle: TextStyle(fontSize: 15, fontWeight: FontWeight.w800),
       ),
-      onPressed: () {},
+      onPressed: () {
+        NavigationService.instance.navigateTo(EnumRoutes.createAccount);
+      },
     );
   }
 

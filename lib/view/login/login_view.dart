@@ -7,8 +7,10 @@ import 'package:app_controle_estoque/core/utils/size_box_height.dart';
 import 'package:app_controle_estoque/widgets/custom_button.dart';
 import 'package:app_controle_estoque/widgets/custom_divider.dart';
 import 'package:app_controle_estoque/widgets/custom_image.dart';
+import 'package:app_controle_estoque/widgets/custom_loading.dart';
 import 'package:app_controle_estoque/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:validatorless/validatorless.dart';
 
 class LoginView extends StatefulWidget {
@@ -19,68 +21,84 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
 
-final loginController = getIt<LoginControler>();
+  final loginController = getIt<LoginControler>();
 
   final _formKey = GlobalKey<FormState>();
 
+  @override
+  void initState() {
+    super.initState();
+    loginController.checkStateLogin();
+  }
 
-
-@override
+  @override
   void dispose() {
-    loginController.emailController.dispose();
-    loginController.passwordController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
     super.dispose();
   }
 
-
-  void logar() {
+  Future<void> logar() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
-  }
-
-
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          physics: BouncingScrollPhysics(),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              SizeBoxHeight.customSizedBox(context, 0.18),
-              CustomLogoImage(image: 'assets/images/icon.png'),
-              SizeBoxHeight.customSizedBox(context, 0.09),
-              _buildForm(context),
-              SizeBoxHeight.customSizedBox(context, 0.01),
-              buildButtonCreateAccount(),
-              SizeBoxHeight.customSizedBox(context, 0.01),
-              CustomDivider(),
-              SizeBoxHeight.customSizedBox(context, 0.05),
-              _buildButtonLogout(context),
-              SizeBoxHeight.customSizedBox(context, 0.15),
-              version(context),
-              SizeBoxHeight.customSizedBox(context, 0.05),
-            ],
-          ),
-        ),
-      ),
+    await loginController.login(
+      email: emailController.text,
+      password: passwordController.text,
+      context: context,
     );
   }
 
-  Widget _buildForm(BuildContext context) {
+  @override
+  Widget build(BuildContext context) {
+    return Observer(builder: (_) {
+      return Scaffold(
+        body: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 10),
+          child: SingleChildScrollView(
+            physics: BouncingScrollPhysics(),
+            child: loginController.isLoading
+                ? Center(
+                    child: CustomIsLoading(
+                      message: 'Carregando...',
+                    ),
+                  )
+                : Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      SizeBoxHeight.customSizedBox(context, 0.18),
+                      CustomLogoImage(image: 'assets/images/icon.png'),
+                      SizeBoxHeight.customSizedBox(context, 0.09),
+                      _buildForm(context, loginController),
+                      SizeBoxHeight.customSizedBox(context, 0.01),
+                      buildButtonCreateAccount(),
+                      SizeBoxHeight.customSizedBox(context, 0.01),
+                      CustomDivider(),
+                      SizeBoxHeight.customSizedBox(context, 0.05),
+                      _buildButtonLogout(context),
+                      SizeBoxHeight.customSizedBox(context, 0.15),
+                      version(context),
+                      SizeBoxHeight.customSizedBox(context, 0.05),
+                    ],
+                  ),
+          ),
+        ),
+      );
+    });
+  }
+
+  Widget _buildForm(BuildContext context, LoginControler controller) {
     return Form(
       key: _formKey,
       child: Column(
         children: [
           CustomTextForm(
-            controller: loginController.emailController,
+            controller: emailController,
             inputHeight: 70,
             borderRadius: 30,
             hintText: 'E-mail',
@@ -96,7 +114,7 @@ final loginController = getIt<LoginControler>();
           ),
           SizeBoxHeight.customSizedBox(context, 0.005),
           CustomTextForm(
-            controller: loginController.passwordController,
+            controller: passwordController,
             inputHeight: 70,
             borderRadius: 30,
             hintText: 'Senha',
@@ -105,9 +123,16 @@ final loginController = getIt<LoginControler>();
               Icons.lock_outlined,
               color: AppColors.blue,
             ),
-            prefixIcon: Icon(
-              Icons.remove_red_eye_outlined,
-              color: AppColors.blue,
+            obscureText: controller.isObscure,
+            prefixIcon: IconButton(
+              icon: Icon(
+                controller.isObscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color:
+                    controller.isObscure ? AppColors.darkBlue : AppColors.blue,
+              ),
+              onPressed: () => controller.setObscure(),
             ),
             validator: Validatorless.multiple([
               Validatorless.required('Por favor digite sua senha'),
@@ -128,9 +153,7 @@ final loginController = getIt<LoginControler>();
       colorLabel: Colors.white,
       borderRadius: 30,
       label: 'Entrar',
-      onTap: () {
-        logar();
-      },
+      onTap: () async => await logar(),
     );
   }
 

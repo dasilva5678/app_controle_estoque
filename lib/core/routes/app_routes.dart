@@ -35,6 +35,8 @@ class NavigationService {
         return '/login';
       case EnumRoutes.createAccount:
         return '/createAccount';
+      case EnumRoutes.home:
+        return '/home';
       default:
         throw Exception('Route not found');
     }

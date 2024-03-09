@@ -6,6 +6,7 @@ import 'package:app_controle_estoque/widgets/custom_button.dart';
 import 'package:app_controle_estoque/widgets/custom_divider.dart';
 import 'package:app_controle_estoque/widgets/custom_image.dart';
 import 'package:app_controle_estoque/widgets/custom_text_form.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:flutter/material.dart';
 import 'package:validatorless/validatorless.dart';
@@ -18,45 +19,69 @@ class CreateAccountView extends StatefulWidget {
 }
 
 class _CreateAccountViewState extends State<CreateAccountView> {
-  final createAccountController = getIt<CreateAccountController>();
-
+  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final confirmPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  void createAccount() {
+  final createAccountController = getIt<CreateAccountController>();
+
+  void createAccount() async {
     if (!_formKey.currentState!.validate()) {
       return;
     }
+    await createAccountController.createAcount(
+      name: nameController.text,
+      phone: phoneController.text,
+      email: emailController.text,
+      password: passwordController.text,
+      context: context,
+    );
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    phoneController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Criar conta',
-          style: TextStyle(color: Colors.white),
+    return Observer(builder: (context) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(
+            'Criar conta',
+            style: TextStyle(color: Colors.white),
+          ),
+          backgroundColor: AppColors.blue,
+          iconTheme: IconThemeData(color: Colors.white),
         ),
-        backgroundColor: AppColors.blue,
-        iconTheme: IconThemeData(color: Colors.white),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              SizeBoxHeight.customSizedBox(context, 0.10),
-              CustomLogoImage(image: "assets/images/create_account.png"),
-              SizeBoxHeight.customSizedBox(context, 0.05),
-              _buildForm(),
-              SizeBoxHeight.customSizedBox(context, 0.02),
-              CustomDivider(),
-              SizeBoxHeight.customSizedBox(context, 0.02),
-              _builButton(),
-            ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                SizeBoxHeight.customSizedBox(context, 0.10),
+                CustomLogoImage(image: "assets/images/create_account.png"),
+                SizeBoxHeight.customSizedBox(context, 0.05),
+                _buildForm(),
+                SizeBoxHeight.customSizedBox(context, 0.02),
+                CustomDivider(),
+                SizeBoxHeight.customSizedBox(context, 0.02),
+                _builButton(),
+              ],
+            ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   Widget _buildForm() {
@@ -65,7 +90,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
       child: Column(
         children: [
           CustomTextForm(
-            controller: createAccountController.nameController,
+            controller: nameController,
             inputHeight: 50,
             borderRadius: 30,
             hintText: 'Nome',
@@ -76,7 +101,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             ),
           ),
           CustomTextForm(
-            controller: createAccountController.phoneController,
+            controller: phoneController,
             inputHeight: 50,
             borderRadius: 30,
             hintText: 'Celular',
@@ -91,7 +116,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             ],
           ),
           CustomTextForm(
-            controller: createAccountController.emailController,
+            controller: emailController,
             inputHeight: 50,
             borderRadius: 30,
             hintText: 'E-mail',
@@ -106,7 +131,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             ]),
           ),
           CustomTextForm(
-            controller: createAccountController.passwordController,
+            controller: passwordController,
             inputHeight: 50,
             borderRadius: 30,
             hintText: 'Senha',
@@ -115,9 +140,17 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               Icons.lock_outlined,
               color: AppColors.blue,
             ),
-            prefixIcon: Icon(
-              Icons.remove_red_eye_outlined,
-              color: AppColors.blue,
+            obscureText: createAccountController.isObscure,
+            prefixIcon: IconButton(
+              icon: Icon(
+                createAccountController.isObscure
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: createAccountController.isObscure
+                    ? AppColors.darkBlue
+                    : AppColors.blue,
+              ),
+              onPressed: () => createAccountController.setObscure(),
             ),
             validator: Validatorless.multiple([
               Validatorless.required('Por favor digite sua senha'),
@@ -126,7 +159,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
             ]),
           ),
           CustomTextForm(
-            controller: createAccountController.confirmPasswordController,
+            controller: confirmPasswordController,
             inputHeight: 50,
             borderRadius: 30,
             hintText: 'Confirmação de senha',
@@ -135,13 +168,23 @@ class _CreateAccountViewState extends State<CreateAccountView> {
               Icons.lock_outlined,
               color: AppColors.blue,
             ),
-            prefixIcon: Icon(
-              Icons.remove_red_eye_outlined,
-              color: AppColors.blue,
+            obscureText:
+                createAccountController.isPasswordConfirmationObscureIcon,
+            prefixIcon: IconButton(
+              icon: Icon(
+                createAccountController.isPasswordConfirmationObscureIcon
+                    ? Icons.visibility_off_outlined
+                    : Icons.visibility_outlined,
+                color: createAccountController.isPasswordConfirmationObscureIcon
+                    ? AppColors.darkBlue
+                    : AppColors.blue,
+              ),
+              onPressed: () =>
+                  createAccountController.passwordConfirmationObscure(),
             ),
             validator: Validatorless.compare(
-              createAccountController.confirmPasswordController,
-              'As senhas não são iguais!',
+              passwordController,
+              'Senhas não conferem!',
             ),
           ),
         ],
@@ -155,9 +198,7 @@ class _CreateAccountViewState extends State<CreateAccountView> {
       height: 50,
       width: MediaQuery.of(context).size.width * 0.7,
       borderRadius: 30,
-      onTap: () {
-        createAccount();
-      },
+      onTap: () async => createAccount(),
       colorButton: AppColors.blue,
       colorLabel: Colors.white,
     );

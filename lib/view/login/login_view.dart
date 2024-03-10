@@ -1,3 +1,4 @@
+import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/controllers/login_controller.dart';
 import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
 import 'package:app_controle_estoque/core/enums/enum_routes.dart';
@@ -26,12 +27,14 @@ class _LoginViewState extends State<LoginView> {
   final confirmPasswordController = TextEditingController();
 
   final loginController = getIt<LoginController>();
+  final homeController = getIt<HomeController>();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
+    clearList();
   }
 
   @override
@@ -39,6 +42,13 @@ class _LoginViewState extends State<LoginView> {
     emailController.dispose();
     passwordController.dispose();
     super.dispose();
+  }
+
+  void clearList() {
+    homeController.auditList.clear();
+    homeController.productList.clear();
+    homeController.pendingList.clear();
+    homeController.sentList.clear();
   }
 
   Future<void> logar() async {

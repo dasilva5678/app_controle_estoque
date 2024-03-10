@@ -27,7 +27,7 @@ class CustomTextForm extends StatefulWidget {
     Key? key,
     this.maxLines = 1,
     this.borderRadius = 10,
-    this.inputHeight = 33,
+    this.inputHeight = 40,
     this.fontSize = 17,
     this.label,
     this.hintText,
@@ -98,6 +98,7 @@ class _CustomTextFormState extends State<CustomTextForm> {
               ),
             ),
             enabledBorder: OutlineInputBorder(
+              gapPadding: 0,
               borderSide: BorderSide(color: AppColors.blue),
               borderRadius: BorderRadius.all(
                 Radius.circular(widget.borderRadius),

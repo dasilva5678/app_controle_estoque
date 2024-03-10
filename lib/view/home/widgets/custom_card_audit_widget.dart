@@ -33,120 +33,118 @@ class _CustomCardAuditState extends State<CustomCardAudit> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(
-      builder: (context) {
-        return GestureDetector(
-          onTap: () async => widget.onTap(),
-          child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(color: AppColors.darkBlue),
-                borderRadius: BorderRadius.circular(15),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: Column(
+    return GestureDetector(
+      onTap: () async => widget.onTap(),
+      child: Container(
+        padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: AppColors.darkBlue),
+            borderRadius: BorderRadius.circular(15),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.circle,
+                            size: 8,
+                            color: homeController
+                                .getColor(widget.audit.status ?? "Pendente"),
+                          ),
+                          SizeBoxWidht.customSizedBox(context, 0.01),
+                          Text(
+                            widget.audit.status ?? "Pendente",
+                            style: TextStyle(
+                              color: homeController
+                                  .getColor(widget.audit.status ?? "Pendente"),
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          IconButton(
+                            onPressed: () => widget.delete(),
+                            icon: Icon(
+                              Icons.delete_outlined,
+                              color: Colors.red,
+                              size: 30,
+                            ),
+                          ),
+                          IconButton(
+                            onPressed: () => widget.edit(),
+                            icon: Icon(
+                              Icons.edit_note,
+                              color: AppColors.blue,
+                              size: 30,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  CustomDivider(
+                    color: AppColors.darkBlue,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            'Data:',
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: AppColors.blue,
+                            ),
+                          ),
+                          SizeBoxWidht.customSizedBox(context, 0.040),
+                          Expanded(
+                            flex: 5,
+                            child: Text(
+                              widget.audit.date ?? "Não informado",
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizeBoxHeight.customSizedBox(context, 0.01),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(
-                                Icons.circle,
-                                size: 8,
-                                color: homeController.getColor(widget.audit.statusID ?? "Pendente"),
-                              ),
-                              SizeBoxWidht.customSizedBox(context, 0.01),
-                              Text(
-                                widget.audit.statusID ?? "Pendente",
-                                style: TextStyle(
-                                  color: homeController.getColor(widget.audit.statusID ?? "Pendente"),
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ],
+                          Text(
+                            "Unidade:",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.blue),
                           ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              IconButton(
-                                onPressed: () => widget.delete(),
-                                icon: Icon(
-                                  Icons.delete_outlined,
-                                  color: Colors.red,
-                                  size: 30,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () => widget.edit(),
-                                icon: Icon(
-                                  Icons.edit_note,
-                                  color: AppColors.blue,
-                                  size: 30,
-                                ),
-                              ),
-                            ],
+                          SizeBoxWidht.customSizedBox(context, 0.015),
+                          Expanded(
+                            flex: 5,
+                            child: Text(
+                              widget.audit.unit ?? "Não informado",
+                            ),
                           ),
                         ],
                       ),
-                      CustomDivider(
-                        color: AppColors.darkBlue,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              Text(
-                                'Data:',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: AppColors.blue,
-                                ),
-                              ),
-                              SizeBoxWidht.customSizedBox(context, 0.040),
-                              Expanded(
-                                flex: 5,
-                                child: Text(
-                                  widget.audit.date ?? "Não informado",
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizeBoxHeight.customSizedBox(context, 0.01),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Unidade:",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: AppColors.blue),
-                              ),
-                              SizeBoxWidht.customSizedBox(context, 0.015),
-                              Expanded(
-                                flex: 5,
-                                child: Text(
-                                  widget.audit.unit ?? "Não informado",
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      )
                     ],
-                  ),
-                ),
+                  )
+                ],
               ),
             ),
           ),
-        );
-      },
+        ),
+      ),
     );
   }
 }

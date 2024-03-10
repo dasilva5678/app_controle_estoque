@@ -4,13 +4,13 @@ import 'dart:convert';
 class AuditModel {
   final String? id;
   final String? userID;
-  final String? statusID;
+  final String? status;
   final String? unit;
   final String? date;
   AuditModel({
     this.id,
     this.userID,
-    this.statusID,
+    this.status,
     this.unit,
     this.date,
   });
@@ -19,7 +19,7 @@ class AuditModel {
     return <dynamic, dynamic>{
       'id': id ?? "",
       'userID': userID ?? "",
-      'statusID': statusID ?? "",
+      'statusID': status ?? "",
       'unitStore': unit ?? "",
       'date': date ?? "",
     };
@@ -29,7 +29,7 @@ class AuditModel {
     return AuditModel(
       id: map['id'] != null ? map['id'] as String : null,
       userID: map['userID'] != null ? map['userID'] as String : null,
-      statusID: map['statusID'] != null ? map['statusID'] as String : null,
+      status: map['statusID'] != null ? map['statusID'] as String : null,
       unit: map['unitStore'] != null ? map['unitStore'] as String : null,
       date: map['date'] != null ? map['date'] as String : null,
     );

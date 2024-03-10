@@ -32,3 +32,6 @@ class EmailAndPasswordNotMatch extends CustomException {
 class PasswordNotMatch extends CustomException {
   PasswordNotMatch() : super('Senha incorreta!');
 }
+class AuditNotFound extends CustomException {
+  AuditNotFound() : super('Auditoria não encontrada!');
+}

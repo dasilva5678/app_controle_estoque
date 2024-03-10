@@ -1,15 +1,13 @@
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/core/utils/size_box_width.dart';
-import 'package:app_controle_estoque/widgets/custom_button.dart';
 
 import 'package:flutter/material.dart';
 
 Future<void> showDialogEdit({
+  String? idUser,
   required String label,
-  required String textButton,
   required Widget child,
   required BuildContext context,
-  required void Function() onPressed,
 }) async {
   return showDialog(
     context: context,
@@ -46,17 +44,17 @@ Future<void> showDialogEdit({
                   ),
                   Divider(),
                   child,
-                  Center(
-                    child: CustomButton(
-                      label: textButton,
-                      onTap: onPressed,
-                      width: MediaQuery.of(context).size.width * 0.45,
-                      height: MediaQuery.of(context).size.height * 0.04,
-                      borderRadius: 30,
-                      colorButton: AppColors.blue,
-                      colorLabel: Colors.white,
-                    ),
-                  ),
+                  // Center(
+                  //   child: CustomButton(
+                  //     label: textButton,
+                  //     onTap: onPressed,
+                  //     width: MediaQuery.of(context).size.width * 0.45,
+                  //     height: MediaQuery.of(context).size.height * 0.04,
+                  //     borderRadius: 30,
+                  //     colorButton: AppColors.blue,
+                  //     colorLabel: Colors.white,
+                  //   ),
+                  // ),
                   SizeBoxWidht.customSizedBox(context, 0.01),
                 ],
               ),

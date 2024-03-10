@@ -3,6 +3,7 @@ import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/controllers/login_controller.dart';
 import 'package:app_controle_estoque/controllers/stock_controller.dart';
 import 'package:app_controle_estoque/core/hive/initialization_hive.dart';
+import 'package:app_controle_estoque/services/audit_service.dart';
 import 'package:app_controle_estoque/services/login_state.dart';
 import 'package:app_controle_estoque/services/save_user_cache.dart';
 import 'package:app_controle_estoque/services/user_service.dart';
@@ -25,6 +26,7 @@ void dependencies() {
   getIt.registerFactory(() => HomeController(
         saveUserCache: getIt<SaveUserCache>(),
         loginState: getIt<LoginState>(),
+        auditService: getIt<AuditService>(),
       ));
   getIt.registerFactory(() => StockController());
 
@@ -32,4 +34,5 @@ void dependencies() {
   getIt.registerFactory(() => UserService());
   getIt.registerFactory(() => LoginState());
   getIt.registerFactory(() => SaveUserCache());
+  getIt.registerFactory(() => AuditService());
 }

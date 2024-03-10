@@ -11,22 +11,22 @@ import 'package:app_controle_estoque/widgets/show_dialog_edit.dart';
 import 'package:flutter/material.dart';
 
 class StockView extends StatelessWidget {
-  const StockView({super.key});
+  StockView({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          showDialogEdit(
-            context: context,
-            label: "Novo Item",
-            textButton: "Salvar",
-            onPressed: () {
-              // NavigationService.instance.goBack();
-            },
-            child: formAddItem(),
-          );
+          // showDialogEdit(
+          //   context: context,
+          //   label: "Novo Item",
+          //   textButton: "Salvar",
+          //   onPressed: () {
+          //     // NavigationService.instance.goBack();
+          //   },
+          //   child: formAddItem(),
+          // );
         },
         backgroundColor: AppColors.darkBlue,
         child: const Icon(
@@ -80,15 +80,15 @@ class StockView extends StatelessWidget {
                   );
                 },
                 edit: () {
-                  showDialogEdit(
-                    context: context,
-                    label: "Editar",
-                    textButton: "Salvar",
-                    onPressed: () {
-                      NavigationService.instance.goBack();
-                    },
-                    child: editProduct(),
-                  );
+                  //   showDialogEdit(
+                  //     context: context,
+                  //     label: "Editar",
+                  //     textButton: "Salvar",
+                  //     onPressed: () {
+                  //       NavigationService.instance.goBack();
+                  //     },
+                  //     child: editProduct(),
+                  //   );
                 },
                 delete: () {
                   showDialog(

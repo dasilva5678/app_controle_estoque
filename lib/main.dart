@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: AppColors.blue),
         useMaterial3: true,
       ),
-      initialRoute: RouteService.getRouteName(EnumRoutes.login),
+      initialRoute: RouteService.getRouteName(EnumRoutes.splash),
       routes: RouteService.getRoutes(),
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,

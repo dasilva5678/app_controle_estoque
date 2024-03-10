@@ -7,51 +7,138 @@ Future<void> showDialogDetailsProduct({
   required BuildContext context,
   required String label,
   required String textButton,
-  int? maxLines = 8,
   required double height,
   required double whidth,
-  bool message = false,
   required void Function() onPressed,
 }) async {
+  final styleTitle = TextStyle(
+    color: AppColors.blue,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+  final styleItem = TextStyle(
+    color: AppColors.darkBlue,
+    fontSize: 14,
+  );
   return showDialog(
     context: context,
     builder: (context) => AlertDialog(
-      content: SizedBox(
-        height: height,
-        width: whidth,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizeBoxHeight.customSizedBox(context, 0.08),
-            Text("PRODUTO"),
-            Image.asset('assets/images/logo.png',
-                width: MediaQuery.of(context).size.width * 0.15),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Divider(),
-                Text("Nome: Teste"),
-                Text("Código de Barras: 1234"),
-                Text("Data de Validade: 10/03/2023"),
-                Text("Quantidade por embalagem: 5"),
-                Text("Quantidade: 10"),
-                SizeBoxHeight.customSizedBox(context, 0.06),
-                Center(
-                  child: CustomButton(
-                    label: textButton,
-                    onTap: onPressed,
-                    width: MediaQuery.of(context).size.width * 0.45,
-                    height: MediaQuery.of(context).size.height * 0.04,
-                    borderRadius: 30,
-                    colorButton: AppColors.blue,
-                    colorLabel: Colors.white,
-                  ),
+      contentPadding: EdgeInsets.all(20),
+      content: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizeBoxHeight.customSizedBox(context, 0.03),
+          Text(
+            label.toUpperCase(),
+            style: TextStyle(color: AppColors.blue, fontSize: 16),
+          ),
+          SizeBoxHeight.customSizedBox(context, 0.04),
+          Image.asset(
+            'assets/images/logo.png',
+            width: MediaQuery.of(context).size.width * 0.15,
+          ),
+          SizeBoxHeight.customSizedBox(context, 0.01),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Divider(),
+              RichText(
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Nome: ",
+                      style: styleTitle,
+                    ),
+                    TextSpan(
+                      text: "Produto teste",
+                      style: styleItem,
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+              RichText(
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Código de Barras: ",
+                      style: styleTitle,
+                    ),
+                    TextSpan(
+                      text: "123456",
+                      style: styleItem,
+                    ),
+                  ],
+                ),
+              ),
+              RichText(
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Data de Validade: ",
+                      style: styleTitle,
+                    ),
+                    TextSpan(
+                      text: "10/02/2024",
+                      style: styleItem,
+                    ),
+                  ],
+                ),
+              ),
+              RichText(
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Quantidade por embalagem: ",
+                      style: styleTitle,
+                    ),
+                    TextSpan(
+                      text: "10",
+                      style: styleItem,
+                    ),
+                  ],
+                ),
+              ),
+              RichText(
+                overflow: TextOverflow.visible,
+                softWrap: true,
+                text: TextSpan(
+                  children: <TextSpan>[
+                    TextSpan(
+                      text: "Quantidade: ",
+                      style: styleTitle,
+                    ),
+                    TextSpan(
+                      text: "5",
+                      style: styleItem,
+                    ),
+                  ],
+                ),
+              ),
+              SizeBoxHeight.customSizedBox(context, 0.06),
+              Center(
+                child: CustomButton(
+                  label: textButton,
+                  onTap: onPressed,
+                  width: MediaQuery.of(context).size.width * 0.45,
+                  height: MediaQuery.of(context).size.height * 0.04,
+                  borderRadius: 30,
+                  colorButton: AppColors.blue,
+                  colorLabel: Colors.white,
+                ),
+              ),
+            ],
+          ),
+        ],
       ),
     ),
   );

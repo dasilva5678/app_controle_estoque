@@ -25,14 +25,13 @@ class _LoginViewState extends State<LoginView> {
   final passwordController = TextEditingController();
   final confirmPasswordController = TextEditingController();
 
-  final loginController = getIt<LoginControler>();
+  final loginController = getIt<LoginController>();
 
   final _formKey = GlobalKey<FormState>();
 
   @override
   void initState() {
     super.initState();
-    loginController.checkStateLogin();
   }
 
   @override
@@ -92,7 +91,7 @@ class _LoginViewState extends State<LoginView> {
     });
   }
 
-  Widget _buildForm(BuildContext context, LoginControler controller) {
+  Widget _buildForm(BuildContext context, LoginController controller) {
     return Form(
       key: _formKey,
       child: Column(

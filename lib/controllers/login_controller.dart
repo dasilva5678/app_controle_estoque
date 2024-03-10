@@ -6,19 +6,22 @@ import 'package:app_controle_estoque/core/enums/enum_routes.dart';
 import 'package:app_controle_estoque/core/routes/app_routes.dart';
 import 'package:app_controle_estoque/models/user_model.dart';
 import 'package:app_controle_estoque/services/login_state.dart';
+import 'package:app_controle_estoque/services/save_user_cache.dart';
 import 'package:app_controle_estoque/services/user_service.dart';
 import 'package:app_controle_estoque/widgets/custom_showsnackbar.dart';
 
 part 'login_controller.g.dart';
 
-class LoginControler = LoginBase with _$LoginControler;
+class LoginController = LoginBase with _$LoginController;
 
 abstract class LoginBase with Store {
   final UserService userService;
   final LoginState loginState;
+  final SaveUserCache saveUserCache;
   LoginBase({
     required this.userService,
     required this.loginState,
+    required this.saveUserCache,
   });
 
   @observable
@@ -35,6 +38,11 @@ abstract class LoginBase with Store {
 
   @observable
   bool isCheckLoginState = false;
+
+  @action
+  void setCheckLoginState(bool value) {
+    isCheckLoginState = value;
+  }
 
   @action
   void setObscure() {
@@ -85,29 +93,30 @@ abstract class LoginBase with Store {
 
     NavigationService.instance.navigateTo(EnumRoutes.home);
     await loginState.setStateLogin(true);
+    await saveUserCache.saveUserCacheBox(result);
     return result;
   }
 
   @action
   Future<dynamic> checkStateLogin() async {
-    isCheckLoginState = await loginState.checkStateLogin();
+    final result = await loginState.checkStateLogin().onError(
+      (error, stackTrace) async {
+        print(error.toString());
+        print(stackTrace.toString());
+        setCheckLoginState(false);
+        await loginState.setStateLogin(false);
+        return false;
+      },
+    );
+
+    setCheckLoginState(result);
+ 
     if (isCheckLoginState) {
       NavigationService.instance.navigateTo(EnumRoutes.home);
     } else {
       NavigationService.instance.navigateTo(EnumRoutes.login);
+      setCheckLoginState(false);
+      await loginState.setStateLogin(false);
     }
-  }
-
-  @action
-  Color getColor(Set<MaterialState> states) {
-    const Set<MaterialState> interactiveStates = <MaterialState>{
-      MaterialState.pressed,
-      MaterialState.hovered,
-      MaterialState.focused,
-    };
-    if (states.any(interactiveStates.contains)) {
-      return Colors.white;
-    }
-    return Colors.white;
   }
 }

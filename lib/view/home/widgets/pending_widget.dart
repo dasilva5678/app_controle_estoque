@@ -5,9 +5,9 @@ import 'package:flutter/material.dart';
 
 import 'package:app_controle_estoque/models/audit_model.dart';
 
-class SentdWidget extends StatelessWidget {
+class PendingWidget extends StatelessWidget {
   final List<AuditModel> listAudit;
-  const SentdWidget({
+   PendingWidget({
     Key? key,
     required this.listAudit,
   }) : super(key: key);
@@ -20,6 +20,7 @@ class SentdWidget extends StatelessWidget {
       itemBuilder: (context, index) {
         final item = listAudit[index];
         return CustomCardAudit(
+         
           audit: item,
           edit: () {},
           delete: () {
@@ -35,10 +36,9 @@ class SentdWidget extends StatelessWidget {
               },
             );
           },
-          onTap: () {
-            // NavigationService.instance.navigateTo(EnumRoutes.stock);
-          },
+          onTap: () {},
         );
+        ;
       },
     );
   }

@@ -11,13 +11,9 @@ class LoginState {
   Future<bool> checkStateLogin() async {
     try {
       await startBox();
-      final state = await stateLogin.get('stateLogin');
+      bool state = await stateLogin.get('stateLogin');
 
-      if (state == null) {
-        return false;
-      }
-
-      return state as bool;
+      return state;
     } on HiveError catch (error) {
       if (error.message.contains('Box not found')) {
         throw BoxNotFound();

@@ -3,6 +3,7 @@
 import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
 import 'package:app_controle_estoque/core/utils/size_box_height.dart';
+import 'package:app_controle_estoque/models/audit_model.dart';
 import 'package:flutter/material.dart';
 
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
@@ -11,20 +12,16 @@ import 'package:app_controle_estoque/widgets/custom_divider.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
 class CustomCardAudit extends StatefulWidget {
-  final String status;
-  final String date;
-  final String unit;
   final void Function() edit;
   final void Function() delete;
   final void Function() onTap;
+  final AuditModel audit;
   CustomCardAudit({
     Key? key,
-    required this.status,
-    required this.date,
-    required this.unit,
     required this.edit,
     required this.delete,
     required this.onTap,
+    required this.audit,
   }) : super(key: key);
 
   @override
@@ -62,13 +59,13 @@ class _CustomCardAuditState extends State<CustomCardAudit> {
                               Icon(
                                 Icons.circle,
                                 size: 8,
-                                color: homeController.getColor(widget.status),
+                                color: homeController.getColor(widget.audit.statusID ?? "Pendente"),
                               ),
                               SizeBoxWidht.customSizedBox(context, 0.01),
                               Text(
-                                widget.status,
+                                widget.audit.statusID ?? "Pendente",
                                 style: TextStyle(
-                                  color: homeController.getColor(widget.status),
+                                  color: homeController.getColor(widget.audit.statusID ?? "Pendente"),
                                   fontWeight: FontWeight.w600,
                                 ),
                               ),
@@ -116,7 +113,7 @@ class _CustomCardAuditState extends State<CustomCardAudit> {
                               Expanded(
                                 flex: 5,
                                 child: Text(
-                                  widget.date,
+                                  widget.audit.date ?? "Não informado",
                                 ),
                               ),
                             ],
@@ -135,7 +132,7 @@ class _CustomCardAuditState extends State<CustomCardAudit> {
                               Expanded(
                                 flex: 5,
                                 child: Text(
-                                  widget.unit,
+                                  widget.audit.unit ?? "Não informado",
                                 ),
                               ),
                             ],

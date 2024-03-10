@@ -41,6 +41,20 @@ mixin _$HomeController on HomeBase, Store {
     });
   }
 
+  late final _$HomeBaseActionController =
+      ActionController(name: 'HomeBase', context: context);
+
+  @override
+  Color getColor(String status) {
+    final _$actionInfo =
+        _$HomeBaseActionController.startAction(name: 'HomeBase.getColor');
+    try {
+      return super.getColor(status);
+    } finally {
+      _$HomeBaseActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''

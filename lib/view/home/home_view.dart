@@ -28,6 +28,14 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: AppColors.darkBlue,
+        child: const Icon(
+          Icons.library_add_outlined,
+          color: Colors.white,
+        ),
+      ),
       appBar: AppBar(
         title: Text(
           'Auditoria',

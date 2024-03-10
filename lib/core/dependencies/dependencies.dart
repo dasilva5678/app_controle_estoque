@@ -1,4 +1,5 @@
 import 'package:app_controle_estoque/controllers/create_account_controller.dart';
+import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/controllers/login_controller.dart';
 import 'package:app_controle_estoque/core/hive/initialization_hive.dart';
 import 'package:app_controle_estoque/services/login_state.dart';
@@ -18,6 +19,7 @@ void dependencies() {
   getIt.registerFactory(() => CreateAccountController(
         userService: getIt<UserService>(),
       ));
+  getIt.registerFactory(() => HomeController());
 
   //services
   getIt.registerFactory(() => UserService());

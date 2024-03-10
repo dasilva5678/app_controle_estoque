@@ -1,4 +1,4 @@
-import 'package:app_controle_estoque/core/utils/app_colors.dart';
+
 import 'package:app_controle_estoque/models/audit_model.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
@@ -18,7 +18,7 @@ abstract class HomeBase with Store {
     if (status == "Pendente") {
       return Colors.red;
     } else {
-      return AppColors.blue;
+      return Colors.green;
     }
   }
 }

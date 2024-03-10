@@ -63,7 +63,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Icon(Icons.check),
-                  Text(' Concluídos'),
+                  Text(' Enviados'),
                 ],
               ),
             ),

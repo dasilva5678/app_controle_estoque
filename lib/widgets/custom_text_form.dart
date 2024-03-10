@@ -8,6 +8,7 @@ class CustomTextForm extends StatefulWidget {
   final int? maxLines;
   final double borderRadius;
   final double inputHeight;
+  final double? fontSize;
   final String? label;
   final String? hintText;
   final String? title;
@@ -27,6 +28,7 @@ class CustomTextForm extends StatefulWidget {
     this.maxLines = 1,
     this.borderRadius = 10,
     this.inputHeight = 33,
+    this.fontSize = 17,
     this.label,
     this.hintText,
     this.title,
@@ -63,7 +65,7 @@ class _CustomTextFormState extends State<CustomTextForm> {
         child: TextFormField(
           style: TextStyle(
             color: AppColors.darkBlue,
-            fontSize: 17,
+            fontSize: widget.fontSize,
           ),
           autofocus: widget.autoFocus,
           controller: widget.controller,

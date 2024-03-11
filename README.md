@@ -49,9 +49,7 @@ https://drive.google.com/file/d/10lwEimrUcRmYTTPrBHIABr_OLXawVhCo/view?usp=shari
 
 
 # Design
-https://photos.google.com/share/AF1QipNpo1x81yVK1HKbeH5DNBSypZNp955IIU9WsdC2naq5wrnF8uGSSt0KKX1LYEmB1A/photo/AF1QipO_sSkkwHGBVkImzWRfCCK4bh2UQ8YmUsF2Hx7N?key=RV9HTkJMVjJidlpwM2VkQ1AzRVlNd0N4MFo0a0hR
-
-
+![App Controle de Estoque](https://photos.google.com/share/AF1QipNpo1x81yVK1HKbeH5DNBSypZNp955IIU9WsdC2naq5wrnF8uGSSt0KKX1LYEmB1A/photo/AF1QipO_sSkkwHGBVkImzWRfCCK4bh2UQ8YmUsF2Hx7N?key=RV9HTkJMVjJidlpwM2VkQ1AzRVlNd0N4MFo0a0hR)
 
 
 

@@ -49,7 +49,7 @@ https://drive.google.com/file/d/10lwEimrUcRmYTTPrBHIABr_OLXawVhCo/view?usp=shari
 
 
 # Design
-![App Controle de Estoque](https://photos.google.com/share/AF1QipNpo1x81yVK1HKbeH5DNBSypZNp955IIU9WsdC2naq5wrnF8uGSSt0KKX1LYEmB1A/photo/AF1QipO_sSkkwHGBVkImzWRfCCK4bh2UQ8YmUsF2Hx7N?key=RV9HTkJMVjJidlpwM2VkQ1AzRVlNd0N4MFo0a0hR)
+![App_Design](https://github.com/dasilva5678/app_controle_estoque/assets/102528534/d91d92fc-b1d7-4ba4-bdb2-e2330b5260ff)
 
 
 

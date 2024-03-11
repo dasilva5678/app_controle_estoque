@@ -6,15 +6,15 @@ A new Flutter project.
 
 Projeto desenvolvido com:
 
-Framework Flutter.
-Gerenciamento de Estados MobX.
-Banco de dados local Hive.
-Arquitetura MVC com POO e Solid.
-Injeção de dependências GetIt
+- Framework Flutter.
+- Gerenciamento de Estados MobX.
+- Banco de dados local Hive.
+- Arquitetura MVC com POO e Solid.
+- Injeção de dependências GetIt
 
 Versões:
-Dart: 3.3.0
-Flutter: 3.19.1
+- Dart: 3.3.0
+- Flutter: 3.19.1
 
 
 
@@ -24,20 +24,19 @@ Flutter: 3.19.1
 O aplicativo é um sistema de controle de auditoria, projetado para gerenciar auditorias e produtos associados. Desenvolvido com uma interface de usuário intuitiva e amigável para facilitar a navegação e o uso do aplicativo. Ele oferece as seguintes funcionalidades:
 
 Controle de Auditorias:
-Adicionar, excluir, editar e modificar o status das auditorias.
-Visualizar uma lista de auditorias pendentes e enviadas.
-Alterar o status das auditorias de pendentes para enviadas após a conclusão.
+- Adicionar, excluir, editar e modificar o status das auditorias.
+- Visualizar uma lista de auditorias pendentes e enviadas.
+- Alterar o status das auditorias de pendentes para enviadas após a conclusão.
 
 Gerenciamento de Produtos:
-Associar produtos às auditorias.
-Adicionar, excluir e editar produtos associados.
-Visualizar uma lista de produtos associados a cada auditoria.
-Autenticação de Usuários:
+- Associar produtos às auditorias.
+- Adicionar, excluir e editar produtos associados.
+- Visualizar uma lista de produtos associados a cada auditoria.
 
-Autentificação:
-Permitir que os usuários criem contas.
-Autenticar usuários para acessar o sistema.
-Vincular dados de auditorias e produtos aos usuários correspondentes.
+Autenticação de Usuários:
+- Permitir que os usuários criem contas.
+- Autenticar usuários para acessar o sistema.
+- Vincular dados de auditorias e produtos aos usuários correspondentes.
 
 
 

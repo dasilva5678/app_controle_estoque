@@ -129,11 +129,13 @@ abstract class StockBase with Store {
       },
     );
 
+    print("result all ${result}");
     if (result.isNotEmpty) {
       productList = result;
 
       setLoading(false);
     }
+    setLoading(false);
   }
 
   @action
@@ -186,10 +188,10 @@ abstract class StockBase with Store {
 
       getAllProducts(context);
       NavigationService.instance.goBack();
-      // NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
-      //   "auditId": null,
-      //   "userId": null,
-      // });
+      NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
+        "auditId": auditId,
+        "userId": userID,
+      });
       ScaffoldMessenger.of(context).showSnackBar(
         showSnackBarDialog(
           title: 'Sucesso',
@@ -204,7 +206,12 @@ abstract class StockBase with Store {
     print("Result: ${result}");
   }
 
-  Future<void> deleteProduct(String stockId, BuildContext context) async {
+  Future<void> deleteProduct({
+    required String stockId,
+    required BuildContext context,
+    required String auditId,
+    required String userID,
+  }) async {
     setLoading(true);
     final result = await stockService.deleteProduct(stockId).onError(
       (error, stackTrace) {
@@ -226,9 +233,11 @@ abstract class StockBase with Store {
     if (result == true) {
       setLoading(false);
       getAllProducts(context);
+      getAllProducts(context);
+      NavigationService.instance.goBack();
       NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
-        "auditId": null,
-        "userId": null,
+        "auditId": auditId,
+        "userId": userID,
       });
       ScaffoldMessenger.of(context).showSnackBar(
         showSnackBarDialog(

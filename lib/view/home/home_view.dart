@@ -1,9 +1,12 @@
 import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
+import 'package:app_controle_estoque/core/routes/app_routes.dart';
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/view/home/widgets/form_audit.dart';
 import 'package:app_controle_estoque/view/home/widgets/sent_widget.dart';
 import 'package:app_controle_estoque/view/home/widgets/pending_widget.dart';
+import 'package:app_controle_estoque/widgets/custom_app_bar.dart';
+import 'package:app_controle_estoque/widgets/custom_drawer.dart';
 import 'package:app_controle_estoque/widgets/custom_loading.dart';
 import 'package:app_controle_estoque/widgets/custom_show_dialog.dart';
 import 'package:flutter/material.dart';
@@ -49,6 +52,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   }
 
   @override
+  @override
   Widget build(BuildContext context) {
     return Observer(
       builder: (context) {
@@ -80,43 +84,44 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
               color: Colors.white,
             ),
           ),
+          drawer: CustomMenuDrawer(),
           appBar: AppBar(
+            backgroundColor: Colors.blueGrey.shade100,
+            iconTheme: const IconThemeData(color: Colors.black),
+            elevation: 2,
             title: Text(
-              'Auditoria',
+              "Estoque",
               style: TextStyle(
                 color: AppColors.darkBlue,
               ),
             ),
-            leading: IconButton(
-                icon: const Icon(Icons.logout),
-                onPressed: () async {
-                  await homeController.logout();
-                }),
-            backgroundColor: Colors.blueGrey.shade100,
-            bottom: TabBar(
-              controller: _tabController,
-              labelColor: AppColors.darkBlue,
-              unselectedLabelColor: AppColors.blue,
-              tabs: const [
-                Tab(
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.pending_actions),
-                      Text(' Pendentes'),
-                    ],
+            bottom: PreferredSize(
+              preferredSize: Size.fromHeight(48),
+              child: TabBar(
+                controller: _tabController,
+                labelColor: AppColors.darkBlue,
+                unselectedLabelColor: AppColors.blue,
+                tabs: const [
+                  Tab(
+                    icon: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.pending_actions),
+                        Text(' Pendentes'),
+                      ],
+                    ),
                   ),
-                ),
-                Tab(
-                  icon: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.check),
-                      Text(' Enviados'),
-                    ],
+                  Tab(
+                    icon: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(Icons.check),
+                        Text(' Enviados'),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           body: TabBarView(

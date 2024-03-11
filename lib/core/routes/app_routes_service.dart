@@ -35,6 +35,7 @@ class RouteService {
         return StockView(
           userId: args["userId"].toString(),
           auditId: args["auditId"].toString(),
+          
         );
       },
     };

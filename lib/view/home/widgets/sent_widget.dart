@@ -61,10 +61,13 @@ class SentdWidget extends StatelessWidget {
             );
           },
           onTap: () {
-            NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
-              "auditId": item.id,
-              "userId": item.userID,
-            });
+            NavigationService.instance.navigateTo(
+              EnumRoutes.stock,
+              arguments: {
+                "auditId": item.id,
+                "userId": item.userID,
+              },
+            );
           },
         );
       },

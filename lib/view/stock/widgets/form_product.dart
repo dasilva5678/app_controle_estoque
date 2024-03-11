@@ -7,6 +7,8 @@ import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/widgets/custom_button.dart';
 import 'package:app_controle_estoque/widgets/custom_text_form.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:validatorless/validatorless.dart';
 
 // ignore: must_be_immutable
 class FormEditProduct extends StatefulWidget {
@@ -124,28 +126,55 @@ class _FormEditProductState extends State<FormEditProduct> {
             children: [
               CustomTextForm(
                 controller: nomeController,
+                inputHeight: 60,
                 label: 'Nome',
                 fontSize: 12,
+                validator: Validatorless.multiple([
+                  Validatorless.required('Digite o nome do produto'),
+                ]),
               ),
               CustomTextForm(
                 controller: dataValidadeController,
+                inputHeight: 60,
                 label: 'Data de Validade',
                 fontSize: 12,
+                keyboardType: TextInputType.datetime,
+                inputFormatters: [
+                  MaskTextInputFormatter(mask: "##/##/####"),
+                ],
+                validator: Validatorless.multiple([
+                  Validatorless.required('Digite a data de validade'),
+                ]),
               ),
               CustomTextForm(
                 controller: codBarrasController,
+                inputHeight: 60,
                 label: 'Código de Barras',
                 fontSize: 12,
+                keyboardType: TextInputType.number,
+                validator: Validatorless.multiple([
+                  Validatorless.required('Digite o código de barras'),
+                ]),
               ),
               CustomTextForm(
                 controller: quantidadeEmbalagemController,
+                inputHeight: 60,
                 label: 'Quantidade Embalagem',
                 fontSize: 12,
+                keyboardType: TextInputType.number,
+                validator: Validatorless.multiple([
+                  Validatorless.required('Digite a quantidade embalagem'),
+                ]),
               ),
               CustomTextForm(
                 controller: quantidadeController,
+                inputHeight: 60,
                 label: 'Quantidade',
                 fontSize: 12,
+                keyboardType: TextInputType.number,
+                validator: Validatorless.multiple([
+                  Validatorless.required('Digite a quantidade'),
+                ]),
               ),
               SizedBox(
                 height: 35,

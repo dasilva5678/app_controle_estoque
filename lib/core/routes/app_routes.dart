@@ -25,6 +25,22 @@ class NavigationService {
     }
   }
 
+  Future<dynamic> navigateToAndRemoveUntil(
+      EnumRoutes routeName, EnumRoutes untilRoute,
+      {Object? arguments}) {
+    String route = _getRoute(routeName);
+    String untilRouteName = _getRoute(untilRoute);
+    if (navigatorKey.currentState != null) {
+      return navigatorKey.currentState!.pushNamedAndRemoveUntil(
+        route,
+        ModalRoute.withName(untilRouteName),
+        arguments: arguments,
+      );
+    } else {
+      return Future.error('Navigator key is not ready');
+    }
+  }
+
   void goBack() {
     return navigatorKey.currentState!.pop();
   }

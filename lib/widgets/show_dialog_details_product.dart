@@ -1,5 +1,6 @@
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/core/utils/size_box_height.dart';
+import 'package:app_controle_estoque/models/product_model.dart';
 import 'package:app_controle_estoque/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
@@ -9,6 +10,7 @@ Future<void> showDialogDetailsProduct({
   required String textButton,
   required double height,
   required double whidth,
+  required ProductModel productModel,
   required void Function() onPressed,
 }) async {
   final styleTitle = TextStyle(
@@ -54,7 +56,7 @@ Future<void> showDialogDetailsProduct({
                       style: styleTitle,
                     ),
                     TextSpan(
-                      text: "Produto teste",
+                      text: productModel.nameProduct ?? "",
                       style: styleItem,
                     ),
                   ],
@@ -70,7 +72,7 @@ Future<void> showDialogDetailsProduct({
                       style: styleTitle,
                     ),
                     TextSpan(
-                      text: "123456",
+                      text: productModel.barCode ?? "",
                       style: styleItem,
                     ),
                   ],
@@ -86,7 +88,7 @@ Future<void> showDialogDetailsProduct({
                       style: styleTitle,
                     ),
                     TextSpan(
-                      text: "10/02/2024",
+                      text: productModel.expirationDate ?? "",
                       style: styleItem,
                     ),
                   ],
@@ -102,7 +104,7 @@ Future<void> showDialogDetailsProduct({
                       style: styleTitle,
                     ),
                     TextSpan(
-                      text: "10",
+                      text: productModel.quantityPerPack ?? "",
                       style: styleItem,
                     ),
                   ],
@@ -118,7 +120,7 @@ Future<void> showDialogDetailsProduct({
                       style: styleTitle,
                     ),
                     TextSpan(
-                      text: "5",
+                      text: productModel.amount ?? "",
                       style: styleItem,
                     ),
                   ],

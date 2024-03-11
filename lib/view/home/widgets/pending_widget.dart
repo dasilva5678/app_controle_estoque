@@ -5,10 +5,9 @@ import 'package:app_controle_estoque/core/enums/enum_routes.dart';
 import 'package:app_controle_estoque/core/routes/app_routes.dart';
 import 'package:app_controle_estoque/view/home/widgets/custom_card_audit_widget.dart';
 import 'package:app_controle_estoque/view/home/widgets/form_audit.dart';
-import 'package:app_controle_estoque/widgets/show_dialog_delete_product.dart';
-import 'package:app_controle_estoque/widgets/show_dialog_edit.dart';
+import 'package:app_controle_estoque/widgets/alert_dialog_delete_product.dart';
+import 'package:app_controle_estoque/widgets/custom_show_dialog.dart';
 import 'package:flutter/material.dart';
-
 import 'package:app_controle_estoque/models/audit_model.dart';
 
 class PendingWidget extends StatelessWidget {
@@ -30,15 +29,15 @@ class PendingWidget extends StatelessWidget {
         return CustomCardAudit(
           audit: item,
           edit: () {
-            showDialogEdit(
+            customShowDialog(
               label: "Editar",
-              idUser: homeController.userCache.id ?? "",
+              idUser: item.userID ?? "",
               context: context,
               child: FormAudit(
-                auditId: homeController.auditModel.id ?? "",
+                auditId: item.id ?? "",
                 isAdd: false,
                 isEdit: true,
-                userId: homeController.userCache.id ?? "",
+                userId: item.userID ?? "",
               ),
             );
           },
@@ -60,7 +59,12 @@ class PendingWidget extends StatelessWidget {
               },
             );
           },
-          onTap: () {},
+          onTap: () {
+            NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
+              "auditId": item.id,
+              "userId": item.userID,
+            });
+          },
         );
       },
     );

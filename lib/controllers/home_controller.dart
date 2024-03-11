@@ -152,7 +152,7 @@ abstract class HomeBase with Store {
     }
   }
 
-  Future<void> getAllAdit(BuildContext context) async {
+  Future<void> getAllAudit(BuildContext context) async {
     auditList.clear();
     productList.clear();
     pendingList.clear();
@@ -215,7 +215,7 @@ abstract class HomeBase with Store {
       },
     );
     if (result) {
-      getAllAdit(context);
+      getAllAudit(context);
       ScaffoldMessenger.of(context).showSnackBar(
         showSnackBarDialog(
           title: 'Sucesso',
@@ -230,7 +230,10 @@ abstract class HomeBase with Store {
   }
 
   @action
-  Future<void> getAudit(String auditId, BuildContext context) async {
+  Future<void> getAudit(
+    String auditId,
+    BuildContext context,
+  ) async {
     setLoading(true);
 
     final result = await auditService.getAudit(auditId).onError(
@@ -250,9 +253,59 @@ abstract class HomeBase with Store {
         return AuditModel();
       },
     );
-    if (result.id != null) {
-      auditModel = result;
+
+    auditModel = result;
+    setLoading(false);
+  }
+
+  @action
+  Future<void> updateAudit({
+    required BuildContext context,
+    String? id,
+    String? userID,
+    String? status,
+    String? unit,
+    String? date,
+  }) async {
+    setLoading(true);
+
+    final updateAuditModel = AuditModel(
+      id: id,
+      userID: userID,
+      status: status,
+      unit: unit,
+      date: date,
+    );
+    final result = await auditService
+        .updateAudit(updateAuditModel)
+        .onError((error, stackTrace) {
+      print(error.toString());
+      print(stackTrace.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        showSnackBarDialog(
+          title: 'Aviso',
+          label: error.toString(),
+          icon: Icons.check_circle_outline,
+          textColorLabel: Colors.white,
+          backgroundColor: Colors.red,
+        ),
+      );
       setLoading(false);
+      return {};
+    });
+    if (result.isNotEmpty) {
+      setLoading(false);
+      getAllAudit(context);
+      NavigationService.instance.navigateTo(EnumRoutes.home);
+      ScaffoldMessenger.of(context).showSnackBar(
+        showSnackBarDialog(
+          title: 'Sucesso',
+          label: "Auditoria atualizada com sucesso",
+          icon: Icons.check_circle_outline,
+          textColorLabel: Colors.white,
+          backgroundColor: AppColors.blue,
+        ),
+      );
     }
   }
 

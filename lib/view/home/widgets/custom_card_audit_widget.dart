@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/core/utils/size_box_width.dart';
 import 'package:app_controle_estoque/widgets/custom_divider.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
+
 
 class CustomCardAudit extends StatefulWidget {
   final void Function() edit;

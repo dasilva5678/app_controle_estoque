@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:app_controle_estoque/widgets/menu_popup_button.dart';
+import 'package:app_controle_estoque/models/product_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 
@@ -10,18 +10,21 @@ import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/core/utils/size_box_height.dart';
 import 'package:app_controle_estoque/core/utils/size_box_width.dart';
 import 'package:app_controle_estoque/widgets/custom_divider.dart';
+import 'package:app_controle_estoque/widgets/menu_popup_button.dart';
 
 class CustomCardProductWidget extends StatefulWidget {
   final void Function() toView;
   final void Function() edit;
   final void Function() delete;
   final void Function() onTap;
+  final ProductModel productModel;
   CustomCardProductWidget({
     Key? key,
     required this.toView,
     required this.edit,
     required this.delete,
     required this.onTap,
+    required this.productModel,
   }) : super(key: key);
 
   @override
@@ -58,7 +61,7 @@ class _CustomCardProductWidgetState extends State<CustomCardProductWidget> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
-                                "CAIXA DE ISOPOR",
+                                widget.productModel.nameProduct ?? "",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w600,
                                   color: AppColors.darkBlue,
@@ -68,7 +71,7 @@ class _CustomCardProductWidgetState extends State<CustomCardProductWidget> {
                           ),
                           MenuPopupButton(
                             delete: widget.delete,
-                            edit: widget.edit,
+                            edit: () => widget.edit(),
                             toView: () => widget.toView(),
                           ),
                         ],
@@ -92,7 +95,7 @@ class _CustomCardProductWidgetState extends State<CustomCardProductWidget> {
                               Expanded(
                                 flex: 5,
                                 child: Text(
-                                  "20",
+                                  widget.productModel.amount ?? "",
                                 ),
                               ),
                             ],
@@ -111,7 +114,7 @@ class _CustomCardProductWidgetState extends State<CustomCardProductWidget> {
                               Expanded(
                                 flex: 5,
                                 child: Text(
-                                  "Caixa",
+                                  widget.productModel.quantityPerPack ?? "",
                                 ),
                               ),
                             ],

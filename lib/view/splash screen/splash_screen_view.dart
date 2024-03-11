@@ -50,13 +50,13 @@ class _SplasScreenViewState extends State<SplasScreenView>
   Widget build(BuildContext context) {
     _controller.forward();
     return Scaffold(
-      backgroundColor: AppColors.blue,
+      backgroundColor: Colors.blueGrey.shade100,
       body: Center(
         child: FadeTransition(
           opacity: _animation,
           child: Image.asset(
             'assets/images/logo.png',
-            width: MediaQuery.of(context).size.width * 0.15,
+            width: MediaQuery.of(context).size.width * 0.35,
           ),
         ),
       ),

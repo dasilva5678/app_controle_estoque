@@ -30,7 +30,13 @@ class RouteService {
       RouteService.getRouteName(EnumRoutes.createAccount): (context) =>
           CreateAccountView(),
       RouteService.getRouteName(EnumRoutes.home): (context) => HomeView(),
-      RouteService.getRouteName(EnumRoutes.stock): (context) => StockView(),
+      RouteService.getRouteName(EnumRoutes.stock): (context) {
+        final args = ModalRoute.of(context)!.settings.arguments as Map;
+        return StockView(
+          userId: args["userId"].toString(),
+          auditId: args["auditId"].toString(),
+        );
+      },
     };
   }
 }

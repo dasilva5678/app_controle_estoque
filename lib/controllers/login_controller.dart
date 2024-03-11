@@ -82,18 +82,21 @@ abstract class LoginBase with Store {
         setLoading(false);
 
         await loginState.setStateLogin(false);
-
+        NavigationService.instance.navigateTo(EnumRoutes.login);
         return UserModel();
       },
     );
+    if (result.email != null) {
+      print("Usuário logado com sucesso!");
+      print("Result: ${result.toMap()}");
+      setLoading(false);
 
-    print("Usuário logado com sucesso!");
-    print("Result: ${result.toMap()}");
-    setLoading(false);
+      NavigationService.instance.navigateTo(EnumRoutes.home);
+      await loginState.setStateLogin(true);
+      await saveUserCache.saveUserCacheBox(result);
+      return result;
+    }
 
-    NavigationService.instance.navigateTo(EnumRoutes.home);
-    await loginState.setStateLogin(true);
-    await saveUserCache.saveUserCacheBox(result);
     return result;
   }
 
@@ -110,7 +113,7 @@ abstract class LoginBase with Store {
     );
 
     setCheckLoginState(result);
- 
+
     if (isCheckLoginState) {
       NavigationService.instance.navigateTo(EnumRoutes.home);
     } else {

@@ -162,6 +162,26 @@ mixin _$HomeController on HomeBase, Store {
     return _$getAuditAsyncAction.run(() => super.getAudit(auditId, context));
   }
 
+  late final _$updateAuditAsyncAction =
+      AsyncAction('HomeBase.updateAudit', context: context);
+
+  @override
+  Future<void> updateAudit(
+      {required BuildContext context,
+      String? id,
+      String? userID,
+      String? status,
+      String? unit,
+      String? date}) {
+    return _$updateAuditAsyncAction.run(() => super.updateAudit(
+        context: context,
+        id: id,
+        userID: userID,
+        status: status,
+        unit: unit,
+        date: date));
+  }
+
   late final _$HomeBaseActionController =
       ActionController(name: 'HomeBase', context: context);
 

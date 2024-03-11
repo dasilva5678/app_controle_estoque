@@ -49,7 +49,7 @@ https://drive.google.com/file/d/10lwEimrUcRmYTTPrBHIABr_OLXawVhCo/view?usp=shari
 
 
 # Design
-![App_Design](https://github.com/dasilva5678/app_controle_estoque/assets/102528534/d91d92fc-b1d7-4ba4-bdb2-e2330b5260ff)
+![App Controle de Estoque](https://github.com/dasilva5678/app_controle_estoque/assets/102528534/d91d92fc-b1d7-4ba4-bdb2-e2330b5260ff)
 
 
 

@@ -36,6 +36,10 @@ Link repositório:
 https://github.com/dasilva5678/app_controle_estoque
 
 
+Link Design
+https://photos.app.goo.gl/Ho1HrxPqJAdmb4mcA
+
+
 
 
 

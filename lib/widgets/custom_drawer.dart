@@ -7,7 +7,6 @@ import 'package:app_controle_estoque/core/utils/size_box_height.dart';
 import 'package:app_controle_estoque/core/utils/size_box_width.dart';
 import 'package:app_controle_estoque/widgets/custom_button.dart';
 import 'package:app_controle_estoque/widgets/custom_divider.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 

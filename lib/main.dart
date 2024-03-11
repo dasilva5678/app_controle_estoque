@@ -30,6 +30,7 @@ class MyApp extends StatelessWidget {
       NavigationService.initialize();
     });
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       navigatorKey: navigatorKey,
       theme: ThemeData(

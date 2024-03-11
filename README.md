@@ -6,15 +6,15 @@ A new Flutter project.
 
 Projeto desenvolvido com:
 
--Framework Flutter.
--Gerenciamento de Estados MobX.
--Banco de dados local Hive.
--Arquitetura MVC com POO e Solid.
--Injeção de dependências GetIt
+Framework Flutter.
+Gerenciamento de Estados MobX.
+Banco de dados local Hive.
+Arquitetura MVC com POO e Solid.
+Injeção de dependências GetIt
 
 Versões:
--Dart: 3.3.0
--Flutter: 3.19.1
+Dart: 3.3.0
+Flutter: 3.19.1
 
 
 

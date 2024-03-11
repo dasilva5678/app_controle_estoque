@@ -36,7 +36,6 @@ class _MenuPopupButtonState extends State<MenuPopupButton> {
         color: AppColors.blue,
       ),
       onSelected: (value) {
-        print("value $value");
         switch (value) {
           case 0:
             return widget.toView();

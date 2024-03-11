@@ -6,9 +6,7 @@ import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/widgets/custom_showsnackbar.dart';
 import 'package:flutter/material.dart';
 import 'package:mobx/mobx.dart';
-
 import 'package:app_controle_estoque/services/user_service.dart';
-
 part 'create_account_controller.g.dart';
 
 class CreateAccountController = CreateAccountBase

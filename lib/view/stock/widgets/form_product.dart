@@ -88,8 +88,6 @@ class _FormEditProductState extends State<FormEditProduct> {
   void editOrController() async {
     if (widget.isEdit == true) {
       await getProduct();
-      print(
-          "widget.productModel?.nameProduct ${stockController.productModel.nameProduct}");
       nomeController.text = stockController.productModel.nameProduct == null
           ? ""
           : stockController.productModel.nameProduct!;

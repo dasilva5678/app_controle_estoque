@@ -48,7 +48,7 @@ class SentdWidget extends StatelessWidget {
               builder: (BuildContext context) {
                 return DeleteConfirmationDialog(
                   name: item.unit ?? "",
-                  message: "Tem certeza que deseja ",
+                  message: "Tem certeza que deseja excluir",
                   onConfirm: () {
                     homeController.deleteAudit(item.id!, context);
                     NavigationService.instance.navigateTo(EnumRoutes.home);

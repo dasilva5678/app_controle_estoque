@@ -1,13 +1,10 @@
 import 'package:app_controle_estoque/controllers/home_controller.dart';
 import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
-import 'package:app_controle_estoque/core/routes/app_routes.dart';
 import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:app_controle_estoque/view/home/widgets/form_audit.dart';
 import 'package:app_controle_estoque/view/home/widgets/sent_widget.dart';
 import 'package:app_controle_estoque/view/home/widgets/pending_widget.dart';
-import 'package:app_controle_estoque/widgets/custom_app_bar.dart';
 import 'package:app_controle_estoque/widgets/custom_drawer.dart';
-import 'package:app_controle_estoque/widgets/custom_loading.dart';
 import 'package:app_controle_estoque/widgets/custom_show_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';

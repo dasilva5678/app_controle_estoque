@@ -64,92 +64,100 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
-    return Observer(builder: (_) {
-      return Scaffold(
-        body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 10),
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: loginController.isLoading
-                ? Center(
-                    child: CustomIsLoading(
-                      message: 'Carregando...',
+    return Observer(
+      builder: (_) {
+        return Scaffold(
+          body: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: SingleChildScrollView(
+              physics: BouncingScrollPhysics(),
+              child: loginController.isLoading
+                  ? Center(
+                      child: CustomIsLoading(
+                        message: 'Carregando...',
+                      ),
+                    )
+                  : Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        SizeBoxHeight.customSizedBox(context, 0.18),
+                        CustomLogoImage(image: 'assets/images/icon.png'),
+                        SizeBoxHeight.customSizedBox(context, 0.09),
+                        _buildForm(context, loginController),
+                        SizeBoxHeight.customSizedBox(context, 0.01),
+                        buildButtonCreateAccount(),
+                        SizeBoxHeight.customSizedBox(context, 0.01),
+                        CustomDivider(),
+                        SizeBoxHeight.customSizedBox(context, 0.05),
+                        _buildButtonLogout(context),
+                        SizeBoxHeight.customSizedBox(context, 0.15),
+                        version(context),
+                        SizeBoxHeight.customSizedBox(context, 0.05),
+                      ],
                     ),
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      SizeBoxHeight.customSizedBox(context, 0.18),
-                      CustomLogoImage(image: 'assets/images/icon.png'),
-                      SizeBoxHeight.customSizedBox(context, 0.09),
-                      _buildForm(context, loginController),
-                      SizeBoxHeight.customSizedBox(context, 0.01),
-                      buildButtonCreateAccount(),
-                      SizeBoxHeight.customSizedBox(context, 0.01),
-                      CustomDivider(),
-                      SizeBoxHeight.customSizedBox(context, 0.05),
-                      _buildButtonLogout(context),
-                      SizeBoxHeight.customSizedBox(context, 0.15),
-                      version(context),
-                      SizeBoxHeight.customSizedBox(context, 0.05),
-                    ],
-                  ),
+            ),
           ),
-        ),
-      );
-    });
+        );
+      },
+    );
   }
 
   Widget _buildForm(BuildContext context, LoginController controller) {
     return Form(
       key: _formKey,
-      child: Column(
-        children: [
-          CustomTextForm(
-            controller: emailController,
-            inputHeight: 70,
-            borderRadius: 30,
-            hintText: 'E-mail',
-            label: 'E-mail',
-            suffixIcon: Icon(
-              Icons.email_outlined,
-              color: AppColors.blue,
-            ),
-            validator: Validatorless.multiple([
-              Validatorless.required('Por favor digite seu e-mail'),
-              Validatorless.email('E-mail inválido'),
-            ]),
-          ),
-          SizeBoxHeight.customSizedBox(context, 0.005),
-          CustomTextForm(
-            controller: passwordController,
-            inputHeight: 70,
-            borderRadius: 30,
-            hintText: 'Senha',
-            label: 'Senha',
-            suffixIcon: Icon(
-              Icons.lock_outlined,
-              color: AppColors.blue,
-            ),
-            obscureText: controller.isObscure,
-            prefixIcon: IconButton(
-              icon: Icon(
-                controller.isObscure
-                    ? Icons.visibility_off_outlined
-                    : Icons.visibility_outlined,
-                color:
-                    controller.isObscure ? AppColors.darkBlue : AppColors.blue,
+      child: PopScope(
+        canPop: false,
+        child: Column(
+          children: [
+            CustomTextForm(
+              controller: emailController,
+              inputHeight: 70,
+              borderRadius: 30,
+              hintText: 'E-mail',
+              label: 'E-mail',
+              suffixIcon: Icon(
+                Icons.email_outlined,
+                color: AppColors.blue,
               ),
-              onPressed: () => controller.setObscure(),
+              validator: Validatorless.multiple([
+                Validatorless.required('Por favor digite seu e-mail'),
+                Validatorless.email('E-mail inválido'),
+              ]),
             ),
-            validator: Validatorless.multiple([
-              Validatorless.required('Por favor digite sua senha'),
-              Validatorless.min(
-                  6, 'Sua senha precisa ter no mínimo 6 caracteres'),
-            ]),
-          ),
-        ],
+            SizeBoxHeight.customSizedBox(context, 0.005),
+            CustomTextForm(
+              controller: passwordController,
+              inputHeight: 70,
+              borderRadius: 30,
+              hintText: 'Senha',
+              label: 'Senha',
+              suffixIcon: Icon(
+                Icons.lock_outlined,
+                color: AppColors.blue,
+              ),
+              obscureText: controller.isObscure,
+              prefixIcon: IconButton(
+                icon: Icon(
+                  controller.isObscure
+                      ? Icons.visibility_off_outlined
+                      : Icons.visibility_outlined,
+                  color: controller.isObscure
+                      ? AppColors.darkBlue
+                      : AppColors.blue,
+                ),
+                onPressed: () => controller.setObscure(),
+              ),
+              validator: Validatorless.multiple(
+                [
+                  Validatorless.required('Por favor digite sua senha'),
+                  Validatorless.min(
+                      6, 'Sua senha precisa ter no mínimo 6 caracteres'),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -47,7 +47,7 @@ class PendingWidget extends StatelessWidget {
               builder: (BuildContext context) {
                 return DeleteConfirmationDialog(
                   name: item.unit ?? "",
-                  message: "Tem certeza que deseja ",
+                  message: "Tem certeza que deseja excluir",
                   onConfirm: () {
                     homeController.deleteAudit(item.id!, context);
                     NavigationService.instance.navigateTo(EnumRoutes.home);
@@ -60,10 +60,13 @@ class PendingWidget extends StatelessWidget {
             );
           },
           onTap: () {
-            NavigationService.instance.navigateTo(EnumRoutes.stock, arguments: {
-              "auditId": item.id,
-              "userId": item.userID,
-            });
+            NavigationService.instance.navigateTo(
+              EnumRoutes.stock,
+              arguments: {
+                "auditId": item.id,
+                "userId": item.userID,
+              },
+            );
           },
         );
       },

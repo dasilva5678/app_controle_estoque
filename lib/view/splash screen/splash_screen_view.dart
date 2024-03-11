@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:app_controle_estoque/controllers/login_controller.dart';
 import 'package:app_controle_estoque/core/dependencies/dependencies.dart';
-import 'package:app_controle_estoque/core/utils/app_colors.dart';
 import 'package:flutter/material.dart';
 
 class SplasScreenView extends StatefulWidget {
